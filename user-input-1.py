@@ -1,5 +1,6 @@
 import math
 from datetime import datetime
+# Next lines are of the greetings:
 
 print("               FANTASTIC CALCULATOR")
 print("                 (or just FanC)")
@@ -23,7 +24,7 @@ else:
 hay = 'Good ' + daytime
 
 print(hay + ', ' + name + '!')
-# Here ends the greetings. Next lines are of calculating:
+# Here ends the greetings. Next lines are description of calculating:
 
 print("Let's do some Math! This calculator can do following operations:\n"
       "+ -> addition\n"
@@ -34,6 +35,7 @@ print("Let's do some Math! This calculator can do following operations:\n"
       "V -> square root\n"
       "% -> modulus\n"
       "! -> factorial")
+# Here ends description of calculating. Next lines are of input:
 
 should_be_stopped = False
 
@@ -61,8 +63,8 @@ while not should_be_stopped:
                                   "Try again! Put here your second number -> |")
 
     print("calculating...")
+    # Here ends the input. Next lines are of the MATH:
 
-    # Here starts the MATH with other operators:
     if operator == "!":
         print("Your result is: " + str(math.factorial(int(first_number))))
     elif operator == "V":
@@ -79,7 +81,9 @@ while not should_be_stopped:
         print("Your result is: " + str(int(first_number) ** int(second_number)))
     else:
         print("Your result is: " + str(int(first_number) % int(second_number)))
+    # Here ends the MATH. Next lines are of exit opportunity:
 
     x = input("Do you want to continue calculating? (Y/N): ")
     if x == "N":
         should_be_stopped = True
+# Here ends exit opportunity. It is the end of the code.
