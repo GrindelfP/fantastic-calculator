@@ -46,7 +46,6 @@ operators = "+ - * / ** V % !"
 
 while not should_be_stopped:
     first_number = input("Put here your first number -> |")
-    print(first_number.count("-"))
     while first_number.count("-") > 1 or first_number.count(".") > 1 or \
             not first_number.replace(".", "").replace("-", "").isdigit():
         first_number = input("Are you sure, that you printed a number? "
