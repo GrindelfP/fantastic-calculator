@@ -28,7 +28,12 @@ print(hay + ', ' + name + '!')
 print("Let's do some Math! This calculator can do following operations:\n"
       "+ -> addition\n"
       "- -> subtraction\n"
-      "") # TODO: add all operators and instructions for user (ye can do op. by...)
+      "* -> multiplication\n"
+      "/ -> division\n"
+      "** -> exponentiation\n"
+      "V -> square root\n"
+      "% -> modulus\n"
+      "! -> factorial")
 
 should_be_stopped = False
 
@@ -36,39 +41,47 @@ operators = "+ - * / ** V % !"
 
 while not should_be_stopped:
     first_number = input("Put here your first number -> |")
-    # TODO Work on variant, when the f_n (also s_n) isn't integer (anything except float)
-    # TODO Work on variant, when the f_n (also s_n) is't integer (float)
-    # TODO Also for s_n
+    while not first_number.isdigit():
+        first_number = input("Are you sure, that you printed a number? "
+                             "Try again! Put here your first number -> |")
+
     operator = input("Choose one of this operators: " + operators + " -> |")
+
     while operator not in operators:
         operator = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
                          "Try some of them again!"
-                         "Choose one of this operators: + - * / ** V % ! -> |")
+                         "Choose one of this operators: " + operators + " -> |")
 
     second_number = "nothing special"
 
     if operator != "!" and operator != "V":
         second_number = input("Put here your second number -> |")
-        print("calculating...")
+        while not second_number.isdigit():
+            second_number = input("Are you sure, that you printed a number? "
+                                  "Try again! Put here your second number -> |")
+
+    print("calculating...")
 
     # Here starts the MATH with other operators:
     if operator == "!":
+        print("calculating...")
         print("Your result is: " + str(math.factorial(int(first_number))))
     elif operator == "V":
+        print("calculating...")
         print("Your result is: " + str(math.sqrt(int(first_number))))
     elif operator == "+":
-        print(str(int(first_number) + int(second_number)))
+        print("Your result is: " + str(int(first_number) + int(second_number)))
     elif operator == "-":
-        print(str(int(first_number) - int(second_number)))
+        print("Your result is: " + str(int(first_number) - int(second_number)))
     elif operator == "*":
-        print(str(int(first_number) * int(second_number)))
+        print("Your result is: " + str(int(first_number) * int(second_number)))
     elif operator == "/":
-        print(str(int(first_number) / int(second_number)))
+        print("Your result is: " + str(int(first_number) / int(second_number)))
     elif operator == "**":
-        print(str(int(first_number) ** int(second_number)))
+        print("Your result is: " + str(int(first_number) ** int(second_number)))
     else:
-        print(str(int(first_number) % int(second_number)))
+        print("Your result is: " + str(int(first_number) % int(second_number)))
 
-    x = input("Do you want to stop calculating? (Y/N): ")
-    if x == "Y":
+    x = input("Do you want to continue calculating? (Y/N): ")
+    if x == "N":
         should_be_stopped = True
