@@ -64,10 +64,8 @@ while not should_be_stopped:
 
     # Here starts the MATH with other operators:
     if operator == "!":
-        print("calculating...")
         print("Your result is: " + str(math.factorial(int(first_number))))
     elif operator == "V":
-        print("calculating...")
         print("Your result is: " + str(math.sqrt(int(first_number))))
     elif operator == "+":
         print("Your result is: " + str(int(first_number) + int(second_number)))
