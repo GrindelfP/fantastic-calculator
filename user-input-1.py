@@ -1,5 +1,6 @@
 import math
 from datetime import datetime
+
 # Next lines are of the greetings:
 
 print("               FANTASTIC CALCULATOR")
@@ -34,22 +35,33 @@ print("Let's do some Math! This calculator can do following operations:\n"
       "** -> exponentiation\n"
       "V -> square root\n"
       "% -> modulus\n"
-      "! -> factorial")
-# Here ends description of calculating. Next lines are of input:
+      "! -> factorial"
+      "Please, if your number is decimal, use '.'")
+# Here ends description of calculating.
 
+# Next lines are of input:
 should_be_stopped = False
 
 operators = "+ - * / ** V % !"
 
 while not should_be_stopped:
     first_number = input("Put here your first number -> |")
-    while not first_number.isdigit():
+    print(first_number.count("-"))
+    while first_number.count("-") > 1 or first_number.count(".") > 1 or \
+            not first_number.replace(".", "").replace("-", "").isdigit():
         first_number = input("Are you sure, that you printed a number? "
                              "Try again! Put here your first number -> |")
+    first_number_as_digit = 0
+    if "." in first_number:
+        first_number_as_digit = float(first_number)
+    else:
+        first_number_as_digit = int(first_number)
 
     operator = input("Choose one of this operators: " + operators + " -> |")
 
-    while operator not in operators:
+    # TODO check operator if f_n is negative
+
+    while operator not in operators or operator == " ":
         operator = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
                          "Try some of them again!"
                          "Choose one of this operators: " + operators + " -> |")
@@ -58,29 +70,41 @@ while not should_be_stopped:
 
     if operator != "!" and operator != "V":
         second_number = input("Put here your second number -> |")
-        while not second_number.isdigit():
+        while second_number.count("-") > 1 or second_number.count(".") > 1 or \
+                not second_number.replace(".", "").replace("-", "").isdigit():
             second_number = input("Are you sure, that you printed a number? "
-                                  "Try again! Put here your second number -> |")
+                                  "Try again! Put here your first number -> |")
+
+    second_number_as_digit = 0
+    if "." in second_number:
+        second_number_as_digit = float(second_number)
+    else:
+        second_number_as_digit = int(second_number)
 
     print("calculating...")
-    # Here ends the input. Next lines are of the MATH:
+    # Here ends the input.
 
+    # Next lines are of the MATH:
     if operator == "!":
-        print("Your result is: " + str(math.factorial(int(first_number))))
+        print("Your result is: " + str(math.factorial(first_number_as_digit)))
     elif operator == "V":
-        print("Your result is: " + str(math.sqrt(int(first_number))))
+        print("Your result is: " + str(math.sqrt(first_number_as_digit)))
     elif operator == "+":
-        print("Your result is: " + str(int(first_number) + int(second_number)))
+        print("Your result is: " + str(first_number_as_digit + second_number_as_digit))
     elif operator == "-":
-        print("Your result is: " + str(int(first_number) - int(second_number)))
+        print("Your result is: " + str(first_number_as_digit - second_number_as_digit))
     elif operator == "*":
-        print("Your result is: " + str(int(first_number) * int(second_number)))
+        print("Your result is: " + str(first_number_as_digit * second_number_as_digit))
     elif operator == "/":
-        print("Your result is: " + str(int(first_number) / int(second_number)))
+        print("Your result is: " + str(first_number_as_digit / second_number_as_digit))
     elif operator == "**":
-        print("Your result is: " + str(int(first_number) ** int(second_number)))
+        print("Your result is: " + str(first_number_as_digit ** second_number_as_digit))
+    elif operator == "%":
+        print("Your result is: " + str(first_number_as_digit % second_number_as_digit))
     else:
-        print("Your result is: " + str(int(first_number) % int(second_number)))
+        print("Something went wrong...\n"
+              "Your operator wasn't recognized.\n"
+              "If you want you can try to do this again.")
     # Here ends the MATH. Next lines are of exit opportunity:
 
     x = input("Do you want to continue calculating? (Y/N): ")
