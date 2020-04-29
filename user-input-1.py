@@ -65,22 +65,26 @@ while not should_be_stopped:
                          "Try some of them again!"
                          "Choose one of this operators: " + operators + " -> |")
 
-    second_number = "nothing special"
+    while first_number.count("-") > 0 and operator == "!" or first_number.count("-") > 0 and operator == "V":
+        first_number = input("It is impossible to do this operation with negative numbers. "
+                             "Put here a positive one -> |")
+        if "." in first_number:
+            first_number_as_digit = float(first_number)
+        else:
+            first_number_as_digit = int(first_number)
 
-    if operator != "!" and operator != "V":
+    if not operator == "!" and not operator == "V":
         second_number = input("Put here your second number -> |")
         while second_number.count("-") > 1 or second_number.count(".") > 1 or \
                 not second_number.replace(".", "").replace("-", "").isdigit():
             second_number = input("Are you sure, that you printed a number? "
                                   "Try again! Put here your first number -> |")
 
-    second_number_as_digit = 0
-    if "." in second_number:
-        second_number_as_digit = float(second_number)
-    else:
-        second_number_as_digit = int(second_number)
-
-    print("calculating...")
+        second_number_as_digit = 0
+        if "." in second_number:
+            second_number_as_digit = float(second_number)
+        else:
+            second_number_as_digit = int(second_number)
     # Here ends the input.
 
     # Next lines are of the MATH:
@@ -89,6 +93,7 @@ while not should_be_stopped:
     elif operator == "V":
         print("Your result is: " + str(math.sqrt(first_number_as_digit)))
     elif operator == "+":
+        # noinspection PyUnboundLocalVariable
         print("Your result is: " + str(first_number_as_digit + second_number_as_digit))
     elif operator == "-":
         print("Your result is: " + str(first_number_as_digit - second_number_as_digit))
