@@ -35,14 +35,16 @@ print("Let's do some Math! This calculator can do following operations:\n"
       "** -> exponentiation\n"
       "V -> square root\n"
       "% -> modulus\n"
-      "! -> factorial"
+      "! -> factorial\n"
+      "log2x -> logarithm based on 2\n"
+      "lg -> logarithm based on 10\n"
       "Please, if your number is decimal, use '.'")
 # Here ends description of calculating.
 
 # Next lines are of input:
 should_be_stopped = False
 
-operators = "+ - * / ** V % !"
+operators = "+ - * / ** V % ! log2x lg"
 
 while not should_be_stopped:
     first_number = input("Put here your first number -> |")
@@ -65,7 +67,8 @@ while not should_be_stopped:
                          "Try some of them again!"
                          "Choose one of this operators: " + operators + " -> |")
 
-    while first_number.count("-") > 0 and operator == "!" or first_number.count("-") > 0 and operator == "V":
+    while first_number.count("-") > 0 and operator == "!" or first_number.count("-") > 0 and operator == "V" or \
+            first_number.count("-") > 0 and operator == "log2x" or first_number.count("-") > 0 and operator == "lg":
         first_number = input("It is impossible to do this operation with negative numbers. "
                              "Put here a positive one -> |")
         if "." in first_number:
@@ -73,7 +76,7 @@ while not should_be_stopped:
         else:
             first_number_as_digit = int(first_number)
 
-    if not operator == "!" and not operator == "V":
+    if operator != "!" and operator != "V" and operator != "log2x" and operator != "lg":
         second_number = input("Put here your second number -> |")
         while second_number.count("-") > 1 or second_number.count(".") > 1 or \
                 not second_number.replace(".", "").replace("-", "").isdigit():
@@ -92,6 +95,10 @@ while not should_be_stopped:
         print("Your result is: " + str(math.factorial(first_number_as_digit)))
     elif operator == "V":
         print("Your result is: " + str(math.sqrt(first_number_as_digit)))
+    elif operator == "log2x":
+        print("Your result is: " + str(math.log2(first_number_as_digit)))
+    elif operator == "lg":
+        print("Your result is: " + str(math.log10(first_number_as_digit)))
     elif operator == "+":
         # noinspection PyUnboundLocalVariable
         print("Your result is: " + str(first_number_as_digit + second_number_as_digit))
