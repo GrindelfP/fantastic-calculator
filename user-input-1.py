@@ -59,8 +59,8 @@ def to_number(number_as_text):
     return number_as_digit
 
 
-def get_number(place_of_number):
-    number = input("Put here your " + place_of_number + " number -> |")
+def get_number_input(original_prompt):
+    number = input(original_prompt)
     while number.count("-") > 1 or number.count(".") > 1 or \
             not number.replace(".", "").replace("-", "").isdigit():
         number = input("Are you sure, that you printed a number? "
@@ -69,8 +69,19 @@ def get_number(place_of_number):
     return to_number(number)
 
 
+def get_operator_input():
+    operators = "+ - * / ** V % ! log2x lg"
+    operator_input = input("Choose one of this operators: " + operators + " -> |")
+
+    while operator_input not in operators or operator_input == " ":
+        operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
+                               "Try some of them again!"
+                               "Choose one of this operators: " + operators + " -> |")
+    return operator_input
+
+
 # Here starts the program
-print_title("0.1")
+print_title("0.1.2")
 
 print(greetings())
 
@@ -78,31 +89,18 @@ print_instructions()
 
 should_be_stopped = False
 
-operators = "+ - * / ** V % ! log2x lg"
-
 while not should_be_stopped:
-    first_number_as_digit = get_number("first")
+    first_number_as_digit = get_number_input("Put here your first number -> |")
 
-    operator = input("Choose one of this operators: " + operators + " -> |")
-
-    # TODO check operator if f_n is negative
-
-    while operator not in operators or operator == " ":
-        operator = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
-                         "Try some of them again!"
-                         "Choose one of this operators: " + operators + " -> |")
+    operator = get_operator_input()
 
     while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V" or \
-            first_number_as_digit < 0 and operator == "log2x" or first_number_as_digit < 0 and operator == "lg":
-        first_number = input("It is impossible to do this operation with negative numbers. "
-                             "Put here a positive one -> |")
-        if "." in first_number:
-            first_number_as_digit = float(first_number)
-        else:
-            first_number_as_digit = int(first_number)
+            first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
+        first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers. "
+                                                 "Put here a positive one -> |")
 
     if operator != "!" and operator != "V" and operator != "log2x" and operator != "lg":
-        second_number = get_number("second")
+        second_number_as_digit = get_number_input("Put here your second number -> |")
     # Here ends the input.
 
     # Next lines are of the MATH:
