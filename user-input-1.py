@@ -1,4 +1,5 @@
 import math
+import operator
 from datetime import datetime
 
 
@@ -80,8 +81,37 @@ def get_operator_input():
     return operator_input
 
 
+def calculating():
+    if operator == "!":
+        result = "Your result is: " + str(math.factorial(first_number_as_digit))
+    elif operator == "V":
+        result = "Your result is: " + str(math.sqrt(first_number_as_digit))
+    elif operator == "log2x":
+        result = "Your result is: " + str(math.log2(first_number_as_digit))
+    elif operator == "lg":
+        result = "Your result is: " + str(math.log10(first_number_as_digit))
+    elif operator == "+":
+        result = "Your result is: " + str(first_number_as_digit + second_number_as_digit)
+    elif operator == "-":
+        result = 'Your result is: ' + str(first_number_as_digit - second_number_as_digit)
+    elif operator == "*":
+        result = "Your result is: " + str(first_number_as_digit * second_number_as_digit)
+    elif operator == "/":
+        result = "Your result is: " + str(first_number_as_digit / second_number_as_digit)
+    elif operator == "**":
+        result = "Your result is: " + str(first_number_as_digit ** second_number_as_digit)
+    elif operator == "%":
+        result = "Your result is: " + str(first_number_as_digit % second_number_as_digit)
+    else:
+        result = "Something went wrong...\n" \
+                 "Your operator wasn't recognized.\n" \
+                 "If you want you can try to do this again."
+
+    return result
+
+
 # Here starts the program
-print_title("0.1.2")
+print_title("0.1.3")
 
 print(greetings())
 
@@ -94,45 +124,19 @@ while not should_be_stopped:
 
     operator = get_operator_input()
 
-    while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V" or \
-            first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
+    if operator != "!" and operator != "V" and operator != "log2x" and operator != "lg":
+        second_number_as_digit = get_number_input("Put here your second number -> |")
+
+    while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V":
         first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers. "
                                                  "Put here a positive one -> |")
 
-    if operator != "!" and operator != "V" and operator != "log2x" and operator != "lg":
-        second_number_as_digit = get_number_input("Put here your second number -> |")
-    # Here ends the input.
+    while first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
+        first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers or zero. "
+                                                 "Put here a positive one -> |")
 
-    # Next lines are of the MATH:
-    if operator == "!":
-        print("Your result is: " + str(math.factorial(first_number_as_digit)))
-    elif operator == "V":
-        print("Your result is: " + str(math.sqrt(first_number_as_digit)))
-    elif operator == "log2x":
-        print("Your result is: " + str(math.log2(first_number_as_digit)))
-    elif operator == "lg":
-        print("Your result is: " + str(math.log10(first_number_as_digit)))
-    elif operator == "+":
-        # noinspection PyUnboundLocalVariable
-        print("Your result is: " + str(first_number_as_digit + second_number_as_digit))
-    elif operator == "-":
-        print("Your result is: " + str(first_number_as_digit - second_number_as_digit))
-    elif operator == "*":
-        print("Your result is: " + str(first_number_as_digit * second_number_as_digit))
-    elif operator == "/":
-        print("Your result is: " + str(first_number_as_digit / second_number_as_digit))
-    elif operator == "**":
-        print("Your result is: " + str(first_number_as_digit ** second_number_as_digit))
-    elif operator == "%":
-        print("Your result is: " + str(first_number_as_digit % second_number_as_digit))
-    else:
-        print("Something went wrong...\n"
-              "Your operator wasn't recognized.\n"
-              "If you want you can try to do this again.")
-    # Here ends the MATH. Next lines are of exit opportunity:
+    print(calculating())
 
     x = input("Do you want to continue calculating? (Y/N): ")
     if x == "N":
         should_be_stopped = True
-
-# Here ends exit opportunity. It is the end of the code.
