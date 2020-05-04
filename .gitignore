@@ -1,7 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/venv/
+/.idea/
 .name
+*.iml
 misc.xml
 modules.xml
 vcs.xml
