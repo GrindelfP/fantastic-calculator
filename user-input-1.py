@@ -1,5 +1,6 @@
 import math
 from datetime import datetime
+import calculator
 
 
 def print_title(version):
@@ -29,25 +30,23 @@ def daytime():
 def greetings():
     daytime_text = daytime()
     name = input("Please, stay calm and print your name: ")
+    if not name.strip():
+        name = "- whatever your name is"
     greetings_text = 'Good ' + daytime_text
     return greetings_text + ", " + name + "!"
 
 
 def print_instructions():
-    instructions_text = "Let's do some Math! This calculator can do " \
-                        "following operations:\n" \
-                        "+ -> addition\n" \
-                        "- -> subtraction\n" \
-                        "* -> multiplication\n" \
-                        "/ -> division\n" \
-                        "** -> exponentiation\n" \
-                        "V -> square root\n" \
-                        "% -> modulus\n" \
-                        "! -> factorial\n" \
-                        "log2x -> logarithm based on 2\n" \
-                        "lg -> logarithm based on 10\n" \
-                        "Please, if your number is decimal, use '.'"
-    print(instructions_text)
+
+    instructions_text_beginning = "Let's do some Math! This calculator can do " \
+                                  "following operations:"
+    instructions_text_ending = "Please, if your number is decimal, use '.'"
+
+    print(instructions_text_beginning)
+    operations_map = calculator.operations()
+    for key in operations_map:
+        print(key + " -> " + operations_map[key])
+    print(instructions_text_ending)
 
 
 def to_number(number_as_text):
@@ -113,7 +112,7 @@ def calculate():
 
 
 # Here starts the program
-print_title("0.1.3")
+print_title("0.1.4")
 
 print(greetings())
 
