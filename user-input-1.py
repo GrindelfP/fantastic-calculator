@@ -1,5 +1,4 @@
 import math
-import operator
 from datetime import datetime
 
 
@@ -81,33 +80,36 @@ def get_operator_input():
     return operator_input
 
 
-def calculating():
+def calculate():
     if operator == "!":
-        result = "Your result is: " + str(math.factorial(first_number_as_digit))
+        result = math.factorial(first_number_as_digit)
     elif operator == "V":
-        result = "Your result is: " + str(math.sqrt(first_number_as_digit))
+        result = math.sqrt(first_number_as_digit)
     elif operator == "log2x":
-        result = "Your result is: " + str(math.log2(first_number_as_digit))
+        result = math.log2(first_number_as_digit)
     elif operator == "lg":
-        result = "Your result is: " + str(math.log10(first_number_as_digit))
+        result = math.log10(first_number_as_digit)
     elif operator == "+":
-        result = "Your result is: " + str(first_number_as_digit + second_number_as_digit)
+        result = first_number_as_digit + second_number_as_digit
     elif operator == "-":
-        result = 'Your result is: ' + str(first_number_as_digit - second_number_as_digit)
+        result = first_number_as_digit - second_number_as_digit
     elif operator == "*":
-        result = "Your result is: " + str(first_number_as_digit * second_number_as_digit)
+        result = first_number_as_digit * second_number_as_digit
     elif operator == "/":
-        result = "Your result is: " + str(first_number_as_digit / second_number_as_digit)
+        result = first_number_as_digit / second_number_as_digit
     elif operator == "**":
-        result = "Your result is: " + str(first_number_as_digit ** second_number_as_digit)
+        result = first_number_as_digit ** second_number_as_digit
     elif operator == "%":
-        result = "Your result is: " + str(first_number_as_digit % second_number_as_digit)
+        result = first_number_as_digit % second_number_as_digit
     else:
-        result = "Something went wrong...\n" \
-                 "Your operator wasn't recognized.\n" \
-                 "If you want you can try to do this again."
+        result = "unknown"
 
-    return result
+    if result == "unknown":
+        return "Something went wrong...\n" \
+               "Your operator wasn't recognized.\n" \
+               "If you want you can try to do this again."
+    else:
+        return "Your result is: " + str(result)
 
 
 # Here starts the program
@@ -135,7 +137,7 @@ while not should_be_stopped:
         first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers or zero. "
                                                  "Put here a positive one -> |")
 
-    print(calculating())
+    print(calculate())
 
     x = input("Do you want to continue calculating? (Y/N): ")
     if x == "N":
