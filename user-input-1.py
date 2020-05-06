@@ -45,7 +45,7 @@ def print_instructions():
     print(instructions_text_beginning)
     operations_map = calculator.operations()
     for key in operations_map:
-        print(key + " -> " + operations_map[key])
+        print(key, " -> ", operations_map[key])
     print(instructions_text_ending)
 
 
@@ -112,7 +112,7 @@ def calculate():
 
 
 # Here starts the program
-print_title("0.1.4")
+print_title("0.1.4.1")
 
 print(greetings())
 
