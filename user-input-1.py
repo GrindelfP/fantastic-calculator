@@ -37,15 +37,14 @@ def greetings():
 
 
 def print_instructions():
-
     instructions_text_beginning = "Let's do some Math! This calculator can do " \
                                   "following operations:"
     instructions_text_ending = "Please, if your number is decimal, use '.'"
 
     print(instructions_text_beginning)
     operations_map = calculator.operations()
-    for key in operations_map:
-        print(key, " -> ", operations_map[key])
+    for key, value in operations_map.items():
+        print(key, " -> ", value)
     print(instructions_text_ending)
 
 
@@ -69,13 +68,15 @@ def get_number_input(original_prompt):
 
 
 def get_operator_input():
-    operators = "+ - * / ** V % ! log2x lg"
-    operator_input = input("Choose one of this operators: " + operators + " -> |")
+    operators = list(calculator.operations().keys())
+    operators_as_string = " "
+    operators_as_string = operators_as_string.join(operators)
+    operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
 
-    while operator_input not in operators or operator_input == " ":
+    while operator_input not in operators:
         operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
                                "Try some of them again!"
-                               "Choose one of this operators: " + operators + " -> |")
+                               "Choose one of this operators: " + operators_as_string + " -> |")
     return operator_input
 
 
@@ -111,8 +112,21 @@ def calculate():
         return "Your result is: " + str(result)
 
 
+def exit_prompt():
+    to_be_stopped = False
+    exit_request = input("Do you want to continue calculating? (Y/N): ").upper()
+    while exit_request != "N" and exit_request != "Y":
+        exit_request = input("I didn't understand you. Please, type 'Y' or 'N' for 'Yes' and 'No' (Y/N): ").upper()
+
+    if exit_request == "N":
+        to_be_stopped = True
+        print("Good bye!")
+
+    return to_be_stopped
+
+
 # Here starts the program
-print_title("0.1.4.1")
+print_title("0.1.5")
 
 print(greetings())
 
@@ -138,6 +152,4 @@ while not should_be_stopped:
 
     print(calculate())
 
-    x = input("Do you want to continue calculating? (Y/N): ")
-    if x == "N":
-        should_be_stopped = True
+    should_be_stopped = exit_prompt()
