@@ -126,7 +126,7 @@ def exit_prompt():
 
 
 # Here starts the program
-print_title("0.1.5")
+print_title("0.1.6")
 
 print(greetings())
 
@@ -139,7 +139,7 @@ while not should_be_stopped:
 
     operator = get_operator_input()
 
-    if operator != "!" and operator != "V" and operator != "log2x" and operator != "lg":
+    if calculator.second_number_required(operator):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
     while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V":
@@ -147,7 +147,8 @@ while not should_be_stopped:
                                                  "Put here a positive one -> |")
 
     while first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
-        first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers or zero. "
+        first_number_as_digit = get_number_input("It is impossible to do this operation with numbers "
+                                                 "less or equal to 0. "
                                                  "Put here a positive one -> |")
 
     print(calculate())
