@@ -1,6 +1,7 @@
-import math
 from datetime import datetime
 import calculator
+
+# Next lines are of functions, used in user-input-1:
 
 
 def print_title(version):
@@ -80,38 +81,6 @@ def get_operator_input():
     return operator_input
 
 
-def calculate():
-    if operator == "!":
-        result = math.factorial(first_number_as_digit)
-    elif operator == "V":
-        result = math.sqrt(first_number_as_digit)
-    elif operator == "log2x":
-        result = math.log2(first_number_as_digit)
-    elif operator == "lg":
-        result = math.log10(first_number_as_digit)
-    elif operator == "+":
-        result = first_number_as_digit + second_number_as_digit
-    elif operator == "-":
-        result = first_number_as_digit - second_number_as_digit
-    elif operator == "*":
-        result = first_number_as_digit * second_number_as_digit
-    elif operator == "/":
-        result = first_number_as_digit / second_number_as_digit
-    elif operator == "**":
-        result = first_number_as_digit ** second_number_as_digit
-    elif operator == "%":
-        result = first_number_as_digit % second_number_as_digit
-    else:
-        result = "unknown"
-
-    if result == "unknown":
-        return "Something went wrong...\n" \
-               "Your operator wasn't recognized.\n" \
-               "If you want you can try to do this again."
-    else:
-        return "Your result is: " + str(result)
-
-
 def exit_prompt():
     to_be_stopped = False
     exit_request = input("Do you want to continue calculating? (Y/N): ").upper()
@@ -125,12 +94,14 @@ def exit_prompt():
     return to_be_stopped
 
 
-# Here starts the program
-print_title("0.1.6")
+# Here ends lines of functions, used in user-input-1. In next lines starts the program:
+# Here begins the greetings:
+print_title("0.2.0")
 
 print(greetings())
 
 print_instructions()
+# Here ends the greetings. Next lines are of the input:
 
 should_be_stopped = False
 
@@ -138,19 +109,23 @@ while not should_be_stopped:
     first_number_as_digit = get_number_input("Put here your first number -> |")
 
     operator = get_operator_input()
+    # Here ends the input. Next lines are of the calculating:
 
     if calculator.second_number_required(operator):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
-    while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V":
-        first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers. "
-                                                 "Put here a positive one -> |")
+        print(calculator.binary_calculate(first_number_as_digit, operator, second_number_as_digit))
 
-    while first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
-        first_number_as_digit = get_number_input("It is impossible to do this operation with numbers "
-                                                 "less or equal to 0. "
-                                                 "Put here a positive one -> |")
-
-    print(calculate())
+    else:
+        while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V":
+            first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers. "
+                                                     "Put here a positive one -> |")
+        while first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
+            first_number_as_digit = get_number_input("It is impossible to do this operation with numbers "
+                                                     "less or equal to 0. "
+                                                     "Put here a positive one -> |")
+        print(calculator.unary_calculate(first_number_as_digit, operator))
+    # Here ends the calculating. Next lines are of the exit opportunity:
 
     should_be_stopped = exit_prompt()
+# Here ends the exit opportunity. Here ends the program.
