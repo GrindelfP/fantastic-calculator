@@ -96,7 +96,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print_title("0.2.0")
+print_title("0.3.0")
 
 print(greetings())
 
@@ -110,21 +110,13 @@ while not should_be_stopped:
 
     operator = get_operator_input()
     # Here ends the input. Next lines are of the calculating:
+    second_number_as_digit = None
 
     if calculator.second_number_required(operator):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
-        print(calculator.binary_calculate(first_number_as_digit, operator, second_number_as_digit))
+    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator, second_number_as_digit)))
 
-    else:
-        while first_number_as_digit < 0 and operator == "!" or first_number_as_digit < 0 and operator == "V":
-            first_number_as_digit = get_number_input("It is impossible to do this operation with negative numbers. "
-                                                     "Put here a positive one -> |")
-        while first_number_as_digit <= 0 and operator == "log2x" or first_number_as_digit <= 0 and operator == "lg":
-            first_number_as_digit = get_number_input("It is impossible to do this operation with numbers "
-                                                     "less or equal to 0. "
-                                                     "Put here a positive one -> |")
-        print(calculator.unary_calculate(first_number_as_digit, operator))
     # Here ends the calculating. Next lines are of the exit opportunity:
 
     should_be_stopped = exit_prompt()
