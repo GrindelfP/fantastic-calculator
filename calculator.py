@@ -22,8 +22,7 @@ unary_operators = {
 # Next are of the functions, used for operators list and calculating:
 
 
-def operations():
-    return {**binary_operators, **unary_operators}
+operations = {**binary_operators, **unary_operators}
 
 
 def second_number_required(operator):
@@ -74,6 +73,7 @@ def modulus(numerator, divisor):
 
 
 def calculate(first_number_as_digit, operator, second_number_as_digit):
+    result = None
     error = None
     try:
         if operator == "!":

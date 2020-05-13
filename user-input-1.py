@@ -43,7 +43,7 @@ def print_instructions():
     instructions_text_ending = "Please, if your number is decimal, use '.'"
 
     print(instructions_text_beginning)
-    operations_map = calculator.operations()
+    operations_map = calculator.operations
     for key, value in operations_map.items():
         print(key, " -> ", value)
     print(instructions_text_ending)
@@ -69,7 +69,7 @@ def get_number_input(original_prompt):
 
 
 def get_operator_input():
-    operators = list(calculator.operations().keys())
+    operators = list(calculator.operations.keys())
     operators_as_string = " "
     operators_as_string = operators_as_string.join(operators)
     operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
@@ -96,7 +96,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print_title("0.3.0")
+print_title("0.3.1")
 
 print(greetings())
 
@@ -106,12 +106,12 @@ print_instructions()
 should_be_stopped = False
 
 while not should_be_stopped:
-    first_number_as_digit = get_number_input("Put here your first number -> |")
 
+    first_number_as_digit = get_number_input("Put here your first number -> |")
     operator = get_operator_input()
     # Here ends the input. Next lines are of the calculating:
-    second_number_as_digit = None
 
+    second_number_as_digit = None
     if calculator.second_number_required(operator):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
