@@ -30,46 +30,47 @@ def second_number_required(operator):
     return operator in list(binary_operators.keys())
 
 
-def division(first_number_as_digit, second_number_as_digit):
+def division(numerator, divisor):
     try:
-        return first_number_as_digit / second_number_as_digit
+        return numerator / divisor
     except Exception:
-        raise Exception("You tried to divide by 0!")
+        raise Exception("You cannot use ", divisor, "as a divisor!")
 
 
-def factorial(first_number_as_digit):
+def factorial(number):
     try:
-        return math.factorial(first_number_as_digit)
+        return math.factorial(number)
     except Exception:
-        raise Exception("It is impossible to get factorial of negative number!")
+        raise Exception("It is possible to get factorial only of integer!"
+                        "You must use integer.")
 
 
-def even_radical(first_number_as_digit):
+def even_radical(number):
     try:
-        return math.sqrt(first_number_as_digit)
+        return math.sqrt(number)
     except Exception:
         raise Exception("It is impossible to get even radical of negative number!")
 
 
-def logarithm_based_on_two(first_number_as_digit):
+def logarithm_based_on_two(number):
     try:
-        return math.log2(first_number_as_digit)
+        return math.log2(number)
     except Exception:
         raise Exception("You can get logarithm only from number greater than 0!")
 
 
-def logarithm_based_on_ten(first_number_as_digit):
+def logarithm_based_on_ten(number):
     try:
-        return math.log10(first_number_as_digit)
+        return math.log10(number)
     except Exception:
         raise Exception("You can get logarithm only from number greater than 0!")
 
 
-def modulus(first_number_as_digit, second_number_as_digit):
+def modulus(numerator, divisor):
     try:
-        return first_number_as_digit % second_number_as_digit
+        return numerator % divisor
     except Exception:
-        raise Exception("You tried to divide by 0!")
+        raise Exception("You tried to find modulo of division by 0!")
 
 
 def calculate(first_number_as_digit, operator, second_number_as_digit):
