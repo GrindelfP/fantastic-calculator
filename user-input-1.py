@@ -4,11 +4,11 @@ import calculator
 # Next lines are of functions, used in user-input-1:
 
 
-def print_title(version):
+def title(version):
     title_text = "\t\t\t\tFANTASTIC CALCULATOR\n" \
                  "\t\t\t\t\t(or just FanC)\n" \
                  "Welcome to the FANTASTIC CALCULATOR version " + str(version) + "!"
-    print(title_text)
+    return title_text
 
 
 def daytime():
@@ -96,7 +96,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print_title("1.0.0")
+print(title("1.0.1"))
 
 print(greetings())
 
