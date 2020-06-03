@@ -55,14 +55,14 @@ def logarithm_based_on_two(number):
     try:
         return math.log2(number)
     except Exception:
-        raise Exception("You can get logarithm only from number greater than 0!")
+        raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
 def logarithm_based_on_ten(number):
     try:
         return math.log10(number)
     except Exception:
-        raise Exception("You can get logarithm only from number greater than 0!")
+        raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
 def modulus(numerator, divisor):
