@@ -40,7 +40,7 @@ def factorial(number):
     try:
         return math.factorial(number)
     except Exception:
-        raise Exception("It is possible to get factorial only of integer!"
+        raise Exception("It is possible to get factorial only of integer! "
                         "You must use integer.")
 
 
