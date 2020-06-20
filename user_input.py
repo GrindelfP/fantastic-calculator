@@ -1,6 +1,7 @@
 from datetime import datetime
 import calculator
 
+
 # Next lines are of functions, used in user-input-1:
 
 
@@ -43,7 +44,7 @@ def print_instructions():
     instructions_text_ending = "Please, if your number is decimal, use '.'"
 
     print(instructions_text_beginning)
-    operations_map = calculator.operations
+    operations_map = calculator.operators_list
     for key, value in operations_map.items():
         print(key, " -> ", value)
     print(instructions_text_ending)
@@ -66,10 +67,13 @@ def variable_count():
     return variable_count_number
 
 
+# TODO: work on get_number_and_operator_input()
+
+
 def get_number_and_operator_input():
     variable_count_number = int(variable_count())
     operator_count_number = variable_count_number - 1
-    operators = list(calculator.operations.keys())
+    operators = list(calculator.operators_list.keys())
     operators_as_string = " "
     operators_as_string = operators_as_string.join(operators)
 
@@ -90,7 +94,7 @@ def get_number_and_operator_input():
 
 
 def get_operator_input():
-    operators = list(calculator.operations.keys())
+    operators = list(calculator.operators_list.keys())
     operators_as_string = " "
     operators_as_string = operators_as_string.join(operators)
     operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
