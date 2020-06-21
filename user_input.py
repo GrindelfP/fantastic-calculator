@@ -46,7 +46,7 @@ def print_instructions():
     print(instructions_text_beginning)
     operations_map = calculator.operators_list
     for key, value in operations_map.items():
-        print(key, " -> ", value)
+        print(key, " -> ", value.description)
     print(instructions_text_ending)
 
 
@@ -70,25 +70,35 @@ def variable_count():
 # TODO: work on get_number_and_operator_input()
 
 
-def get_number_and_operator_input():
-    variable_count_number = int(variable_count())
-    operator_count_number = variable_count_number - 1
-    operators = list(calculator.operators_list.keys())
-    operators_as_string = " "
-    operators_as_string = operators_as_string.join(operators)
+# def get_number_and_operator_input():
+#     variable_count_number = int(variable_count())
+#     operator_count_number = variable_count_number - 1
+#     operators = list(calculator.operators_list.keys())
+#     operators_as_string = " "
+#     operators_as_string = operators_as_string.join(operators)
+#
+#     for number in range(variable_count_number):
+#         number = input("Put here your number -> |")
+#         operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
+#         while operator_input not in operators:
+#             operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of \
+#                                     given operators? "
+#                                    "Try some of them again!"
+#                                    "Choose one of this operators: " + operators_as_string + " -> |")
+#
+#     while number.count("-") > 1 or number.count(".") > 1 or not number.replace(".", "").replace("-", "").isdigit():
+#         number = input("Are you sure, that you printed a number? "
+#                        "Try again! Put here your number -> |")
+#
+#     return to_number(number)
 
-    for number in range(variable_count_number):
-        number = input("Put here your number -> |")
-        operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
-        while operator_input not in operators:
-            operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of \
-                                    given operators? "
-                                   "Try some of them again!"
-                                   "Choose one of this operators: " + operators_as_string + " -> |")
 
-    while number.count("-") > 1 or number.count(".") > 1 or not number.replace(".", "").replace("-", "").isdigit():
+def get_number_input(original_prompt):
+    number = input(original_prompt)
+    while number.count("-") > 1 or number.count(".") > 1 or \
+            not number.replace(".", "").replace("-", "").isdigit():
         number = input("Are you sure, that you printed a number? "
-                       "Try again! Put here your number -> |")
+                       "Try again! Put here your first number -> |")
 
     return to_number(number)
 
@@ -99,9 +109,9 @@ def get_operator_input():
     operators_as_string = operators_as_string.join(operators)
     operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
 
-    while operator_input not in operators:
+    while not calculator.is_valid_operator(operator_input):
         operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
-                               "Try some of them again!"
+                               "Try some of them again! "
                                "Choose one of this operators: " + operators_as_string + " -> |")
     return operator_input
 
@@ -132,15 +142,15 @@ should_be_stopped = False
 
 while not should_be_stopped:
 
-    first_number_as_digit = get_number_and_operator_input()
-    operator = get_operator_input()
+    first_number_as_digit = get_number_input("Put here your first number -> |")
+    operator_symbol = get_operator_input()
     # Here ends the input. Next lines are of the calculating:
 
     second_number_as_digit = None
-    if calculator.second_number_required(operator):
-        second_number_as_digit = get_number_and_operator_input()
+    if calculator.second_number_required(operator_symbol):
+        second_number_as_digit = get_number_input("Put here your second number -> |")
 
-    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator, second_number_as_digit)))
+    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator_symbol, second_number_as_digit)))
 
     # Here ends the calculating. Next lines are of the exit opportunity:
 
