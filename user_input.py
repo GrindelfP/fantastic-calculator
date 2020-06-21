@@ -150,7 +150,8 @@ while not should_be_stopped:
     if calculator.second_number_required(operator_symbol):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
-    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator_symbol, second_number_as_digit)))
+    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator_symbol,
+                                                         second_number_as_digit)))
 
     # Here ends the calculating. Next lines are of the exit opportunity:
 
