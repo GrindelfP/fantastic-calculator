@@ -131,7 +131,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print(title("1.0.3"))
+print(title("1.1.0"))
 
 print(greetings())
 
