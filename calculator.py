@@ -62,7 +62,7 @@ radical_of_n_index = Operator(symbol="V[n]",
                               can_be_prefix=True,
                               is_binary=False,
                               needs_index=True,
-                              calculation=lambda x, y: even_radical(x))  # TODO: make function
+                              calculation=lambda x, y: radical(x, y))
 factorial = Operator(symbol="!",
                      regex="!",
                      description="factorial",
@@ -141,7 +141,7 @@ def second_number_required(operator_symbol):
         regex = re.compile(regex_as_string)
         search_result = regex.search(operator_symbol)
         is_valid = bool(search_result)
-        if is_valid:
+        if not is_valid:
             is_binary = operator.is_binary
             break
     return is_binary
@@ -162,11 +162,18 @@ def factorial_calculus(number):
                         "You must use integer.")
 
 
-def even_radical(number):
+def radical(number, power):
     try:
-        return math.sqrt(number)
+        return number**(1/power)
     except Exception:
         raise Exception("It is impossible to get even radical of negative number!")
+
+
+def logarithm_based_ob_b(number, base):
+    try:
+        return math.log(number, base)
+    except Exception:
+        raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
 def natural_logarithm(number):

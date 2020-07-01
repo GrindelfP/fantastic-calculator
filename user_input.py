@@ -131,7 +131,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print(title("1.1.0"))
+print(title("1.1.1"))
 
 print(greetings())
 
@@ -150,8 +150,7 @@ while not should_be_stopped:
     if calculator.second_number_required(operator_symbol):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
-    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator_symbol,
-                                                         second_number_as_digit)))
+    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator_symbol, second_number_as_digit)))
 
     # Here ends the calculating. Next lines are of the exit opportunity:
 
