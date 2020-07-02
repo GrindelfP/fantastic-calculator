@@ -56,7 +56,7 @@ modulus = Operator(symbol="%",
                    is_binary=True,
                    needs_index=False,
                    calculation=lambda x, y: modulus_calculus(x, y))
-radical_of_n_index = Operator(symbol="V[n]",
+radical_of_i_index = Operator(symbol="V[i]",
                               regex="V\\[\\d+\\]",
                               description="radical of n-index",
                               can_be_prefix=True,
@@ -70,13 +70,13 @@ factorial = Operator(symbol="!",
                      is_binary=False,
                      needs_index=False,
                      calculation=lambda x, y: factorial_calculus(x))
-logarithm_based_on_b = Operator(symbol="log[b]",
+logarithm_based_on_i = Operator(symbol="log[i]",
                                 regex="log\\[\\d+\\]",
                                 description="logarithm based on b",
                                 can_be_prefix=True,
                                 is_binary=False,
                                 needs_index=True,
-                                calculation=lambda x, y: natural_logarithm(x))
+                                calculation=lambda x, y: logarithm_based_ob_b(x, y))
 ln = Operator(symbol="ln",
               regex="ln",
               description="natural logarithm",
@@ -99,9 +99,9 @@ operators_list = {
     division.symbol: division,
     exponentiation.symbol: exponentiation,
     modulus.symbol: modulus,
-    radical_of_n_index.symbol: radical_of_n_index,
+    radical_of_i_index.symbol: radical_of_i_index,
     factorial.symbol: factorial,
-    logarithm_based_on_b.symbol: logarithm_based_on_b,
+    logarithm_based_on_i.symbol: logarithm_based_on_i,
     ln.symbol: ln,
     lg.symbol: lg
 }
@@ -113,9 +113,9 @@ operators_regex_list = {
     division.regex: division,
     exponentiation.regex: exponentiation,
     modulus.regex: modulus,
-    radical_of_n_index.regex: radical_of_n_index,
+    radical_of_i_index.regex: radical_of_i_index,
     factorial.regex: factorial,
-    logarithm_based_on_b.regex: logarithm_based_on_b,
+    logarithm_based_on_i.regex: logarithm_based_on_i,
     ln.regex: ln,
     lg.regex: lg
 }
@@ -134,16 +134,14 @@ def is_valid_operator(users_operator):
     return is_valid
 
 
-# Next are of the functions, used for operators list and calculating:
 def second_number_required(operator_symbol):
     is_binary = None
     for regex_as_string, operator in operators_regex_list.items():
         regex = re.compile(regex_as_string)
         search_result = regex.search(operator_symbol)
         is_valid = bool(search_result)
-        if not is_valid:
+        if is_valid:
             is_binary = operator.is_binary
-            break
     return is_binary
 
 
@@ -164,7 +162,7 @@ def factorial_calculus(number):
 
 def radical(number, power):
     try:
-        return number**(1/power)
+        return number ** (1 / power)
     except Exception:
         raise Exception("It is impossible to get even radical of negative number!")
 
@@ -198,15 +196,24 @@ def modulus_calculus(numerator, divisor):
 
 
 def calculate(first_number_as_digit, operator_symbol, second_number_as_digit):
-    operation = operators_list[operator_symbol]
     result = None
     error = None
+    regexes = list(map(lambda operator: operator.regex, operators_list.values()))
+    operator_checked = None
+    for regex_as_string in regexes:
+        regex = re.compile(regex_as_string)
+        search_result = regex.search(operator_symbol)
+        if bool(search_result):
+            operator_checked = operators_regex_list[regex_as_string]
+            break
+
     try:
-        if operators_list[operator_symbol].needs_index:
-            second_number_checked = re.sub("[^0-9]", "", operator_symbol)
+        if operator_checked.needs_index:
+            second_number_checked = float(re.sub("[^0-9]", "", operator_symbol))
+            # TODO: code variant if index is float
         else:
             second_number_checked = second_number_as_digit
-        result = operation.calculation(first_number_as_digit, second_number_checked)
+        result = operator_checked.calculation(first_number_as_digit, second_number_checked)
     except Exception as ex:
         error = str(ex)
 
