@@ -1,6 +1,5 @@
 from datetime import datetime
 import calculator
-
 # Next lines are of functions, used in user-input-1:
 
 
@@ -43,9 +42,9 @@ def print_instructions():
     instructions_text_ending = "Please, if your number is decimal, use '.'"
 
     print(instructions_text_beginning)
-    operations_map = calculator.operations
+    operations_map = calculator.operators_list
     for key, value in operations_map.items():
-        print(key, " -> ", value)
+        print(key, " -> ", value.description)
     print(instructions_text_ending)
 
 
@@ -56,6 +55,14 @@ def to_number(number_as_text):
         number_as_digit = int(number_as_text)
 
     return number_as_digit
+
+
+def variable_count():
+    variable_count_number = input("How much variables will have your operation? (Print a natural digit!) -> |")
+    while not variable_count_number.isdigit():
+        variable_count_number = input("You must enter number of operations as an natural integer! Try again! -> |")
+
+    return variable_count_number
 
 
 def get_number_input(original_prompt):
@@ -69,14 +76,14 @@ def get_number_input(original_prompt):
 
 
 def get_operator_input():
-    operators = list(calculator.operations.keys())
+    operators = list(calculator.operators_list.keys())
     operators_as_string = " "
     operators_as_string = operators_as_string.join(operators)
     operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
 
-    while operator_input not in operators:
+    while not calculator.is_valid_operator(operator_input):
         operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
-                               "Try some of them again!"
+                               "Try some of them again! "
                                "Choose one of this operators: " + operators_as_string + " -> |")
     return operator_input
 
@@ -96,7 +103,7 @@ def exit_prompt():
 
 # Here ends lines of functions, used in user-input-1. In next lines starts the program:
 # Here begins the greetings:
-print(title("1.0.2"))
+print(title("1.4.1"))
 
 print(greetings())
 
@@ -108,16 +115,18 @@ should_be_stopped = False
 while not should_be_stopped:
 
     first_number_as_digit = get_number_input("Put here your first number -> |")
-    operator = get_operator_input()
-    # Here ends the input. Next lines are of the calculating:
+
+    user_operator = get_operator_input()
 
     second_number_as_digit = None
-    if calculator.second_number_required(operator):
+    if calculator.second_number_required(user_operator):
         second_number_as_digit = get_number_input("Put here your second number -> |")
 
-    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, operator, second_number_as_digit)))
+# Here ends the input. Next lines are of the calculating:
 
-    # Here ends the calculating. Next lines are of the exit opportunity:
+    print("Your result is -> ", str(calculator.calculate(first_number_as_digit, user_operator, second_number_as_digit)))
+
+# Here ends the calculating. Next lines are of the exit opportunity:
 
     should_be_stopped = exit_prompt()
 # Here ends the exit opportunity. Here ends the program.
