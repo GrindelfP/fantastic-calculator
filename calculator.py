@@ -43,7 +43,7 @@ division = Operator(symbol="/",
                     needs_index=False,
                     calculation=lambda x, y: division_calculus(x, y))
 exponentiation = Operator(symbol="^[i]",
-                          regex="\\^\\[\\d+\\]",
+                          regex="\\^\\[(-)?\\d+(\\.\\d+)?\\]",
                           description="exponentiation with index i",
                           can_be_prefix=False,
                           is_binary=False,
@@ -126,9 +126,8 @@ def is_valid_operator(users_operator):
     is_valid = False
     for regex_as_string in regexes:
         regex = re.compile(regex_as_string)
-        search_result = regex.search(users_operator)
-        is_valid = bool(search_result)
-        if is_valid:
+        if regex.fullmatch(users_operator):
+            is_valid = True
             break
 
     return is_valid
@@ -138,7 +137,7 @@ def second_number_required(operator_symbol):
     is_binary = None
     for regex_as_string, operator in operators_regex_list.items():
         regex = re.compile(regex_as_string)
-        search_result = regex.search(operator_symbol)
+        search_result = regex.fullmatch(operator_symbol)
         is_valid = bool(search_result)
         if is_valid:
             is_binary = operator.is_binary
@@ -202,15 +201,14 @@ def calculate(first_number_as_digit, operator_symbol, second_number_as_digit):
     operator_checked = None
     for regex_as_string in regexes:
         regex = re.compile(regex_as_string)
-        search_result = regex.search(operator_symbol)
+        search_result = regex.fullmatch(operator_symbol)
         if bool(search_result):
             operator_checked = operators_regex_list[regex_as_string]
             break
 
     try:
         if operator_checked.needs_index:
-            second_number_checked = float(re.sub("[^0-9]", "", operator_symbol))
-            # TODO: code variant if index is float
+            second_number_checked = float(re.sub("[^0-9.-]", "", operator_symbol))
         else:
             second_number_checked = second_number_as_digit
         result = operator_checked.calculation(first_number_as_digit, second_number_checked)
