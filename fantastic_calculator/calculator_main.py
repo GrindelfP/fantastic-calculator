@@ -1,0 +1,5 @@
+from fantastic_calculator.user_communication.greetings import print_intro
+from fantastic_calculator.user_communication.calculator_processor import perform_calculation
+
+print_intro()
+perform_calculation()
