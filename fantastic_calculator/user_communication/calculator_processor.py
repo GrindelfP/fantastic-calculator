@@ -1,5 +1,5 @@
 from fantastic_calculator.calculation.calculation import calculate
-from fantastic_calculator.checking import input_checking
+from fantastic_calculator.checking import oerator_checking
 from fantastic_calculator.user_communication import user_input
 
 
@@ -22,7 +22,7 @@ def perform_calculation():
         first_number_as_digit = user_input.get_number_input("Put here your first number -> |")
         user_operator = user_input.get_operator_input()
         second_number_as_digit = None
-        if input_checking.second_number_required(user_operator):
+        if oerator_checking.second_number_required(user_operator):
             second_number_as_digit = user_input.get_number_input("Put here your second number -> |")
         print("Your result is -> ", str(calculate(first_number_as_digit, user_operator,
                                                   second_number_as_digit)))

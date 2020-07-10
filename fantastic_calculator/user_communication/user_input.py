@@ -1,5 +1,5 @@
 from fantastic_calculator.operators import operators_lists
-from fantastic_calculator.checking import input_checking
+from fantastic_calculator.checking import oerator_checking
 
 
 def to_number(number_as_text):
@@ -23,7 +23,7 @@ def get_operator_input():
     operators = list(operators_lists.operators_list.keys())
     operators_as_string = " ".join(operators)
     operator_input = input("Choose one of this operators: " + operators_as_string + " -> |")
-    while not input_checking.is_valid_operator(operator_input):
+    while not oerator_checking.is_valid_operator(operator_input):
         operator_input = input("Sadly, this operator is unsupported by FanC! Did you choose one of given operators? "
                                "Try some of them again! "
                                "Choose one of this operators: " + operators_as_string + " -> |")
