@@ -50,6 +50,6 @@ def print_instructions():
 
 
 def print_intro():
-    print_title("1.9.0")
+    print_title("2.0.0")
     print_greetings()
     print_instructions()
