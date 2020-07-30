@@ -3,7 +3,7 @@ from fantastic_calculator.checking import oerator_checking
 from fantastic_calculator.user_communication import user_input
 
 
-def exit_prompt():
+def exit_prompt() -> bool:
     to_be_stopped = False
     exit_request = input("Do you want to continue calculating? (Y/N): ").upper()
     while exit_request != "N" and exit_request != "Y":
@@ -16,7 +16,7 @@ def exit_prompt():
     return to_be_stopped
 
 
-def perform_calculation():
+def perform_calculation() -> None:
     should_be_stopped = False
     while not should_be_stopped:
         first_number_as_digit = user_input.get_number_input("Put here your first number -> |")

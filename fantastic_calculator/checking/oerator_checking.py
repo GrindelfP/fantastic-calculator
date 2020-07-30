@@ -2,7 +2,7 @@ from fantastic_calculator.operators import operators_lists
 import re
 
 
-def is_valid_operator(users_operator):
+def is_valid_operator(users_operator: str) -> bool:
     regexes = list(map(lambda operator: operator.regex, operators_lists.operators_list.values()))
     is_valid = False
     for regex_as_string in regexes:
@@ -14,7 +14,7 @@ def is_valid_operator(users_operator):
     return is_valid
 
 
-def second_number_required(operator_symbol):
+def second_number_required(operator_symbol: str) -> bool:
     is_binary = None
     for regex_as_string, operator in operators_lists.operators_regex_list.items():
         regex = re.compile(regex_as_string)

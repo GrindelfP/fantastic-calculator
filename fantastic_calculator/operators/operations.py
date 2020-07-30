@@ -1,30 +1,30 @@
 import math
 
 
-def addition_calculus(numerator, divisor):
-    return numerator + divisor
+def addition_calculus(augend: int or float, addend: int or float) -> int or float:
+    return augend + addend
 
 
-def subtraction_calculus(numerator, divisor):
-    return numerator - divisor
+def subtraction_calculus(minuend: int or float, subtrahend: int or float) -> int or float:
+    return minuend - subtrahend
 
 
-def multiplication_calculus(numerator, divisor):
-    return numerator * divisor
+def multiplication_calculus(multiplier: int or float, multiplicand: int or float) -> int or float:
+    return multiplier * multiplicand
 
 
-def division_calculus(numerator, divisor):
+def division_calculus(numerator: int or float, divisor: int or float) -> int or float or str:
     try:
         return numerator / divisor
     except Exception:
         raise Exception("You cannot use ", divisor, "as a divisor!")
 
 
-def exponentiation_calculus(numerator, divisor):
-    return numerator ** divisor
+def exponentiation_calculus(base: int or float, exponent: int or float) -> int or float:
+    return base ** exponent
 
 
-def factorial_calculus(number):
+def factorial_calculus(number: int) -> int or str:
     try:
         return math.factorial(number)
     except Exception:
@@ -32,35 +32,35 @@ def factorial_calculus(number):
                         "You must use integer.")
 
 
-def radical(number, power):
+def radical(radicand: int or float, degree: int or float) -> int or float or str:
     try:
-        return number ** (1 / power)
+        return radicand ** (1 / degree)
     except Exception:
         raise Exception("It is impossible to get even radical of negative number!")
 
 
-def logarithm_based_ob_b(number, base):
+def logarithm_based_ob_b(anti_logarithm: int or float, base: int or float) -> int or float or str:
     try:
-        return math.log(number, base)
+        return math.log(anti_logarithm, base)
     except Exception:
         raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
-def natural_logarithm(number):
+def natural_logarithm(anti_logarithm: int or float) -> int or float or str:
     try:
-        return math.log(number)
+        return math.log(anti_logarithm)
     except Exception:
         raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
-def logarithm_based_on_ten(number):
+def logarithm_based_on_ten(anti_logarithm: int or float) -> int or float or str:
     try:
-        return math.log10(number)
+        return math.log10(anti_logarithm)
     except Exception:
         raise Exception("You can get logarithm only from number greater than 0 or equal to it!")
 
 
-def modulus_calculus(numerator, divisor):
+def modulus_calculus(numerator: int or float, divisor: int or float) -> int or float or str:
     try:
         return numerator % divisor
     except Exception:

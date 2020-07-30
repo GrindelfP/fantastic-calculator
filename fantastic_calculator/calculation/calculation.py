@@ -2,7 +2,8 @@ from fantastic_calculator.operators.operators_lists import operators_list, opera
 import re
 
 
-def calculate(first_number_as_digit, operator_symbol, second_number_as_digit):
+def calculate(first_number_as_digit: int or float, operator_symbol: str, second_number_as_digit: int or float) \
+                                                                                                -> int or float or str:
     result = None
     error = None
     regexes = list(map(lambda operator: operator.regex, operators_list.values()))

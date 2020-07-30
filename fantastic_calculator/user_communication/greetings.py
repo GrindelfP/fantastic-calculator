@@ -3,14 +3,14 @@ from datetime import datetime
 from fantastic_calculator.operators.operators_lists import operators_list
 
 
-def print_title(version):
+def print_title(version: str) -> print():
     title_text = "\t\t\t\tFANTASTIC CALCULATOR\n" \
                  "\t\t\t\t\t(or just FanC)\n" \
                  "Welcome to the FANTASTIC CALCULATOR version " + str(version) + "!"
     return print(title_text)
 
 
-def daytime():
+def daytime() -> str:
     hour_now = datetime.now().hour
 
     if 0 <= hour_now < 6:
@@ -27,7 +27,7 @@ def daytime():
     return daytime_text
 
 
-def print_greetings():
+def print_greetings() -> print():
     daytime_text = daytime()
     name = input("Please, stay calm and print your name: ")
     if not name.strip():
@@ -37,7 +37,7 @@ def print_greetings():
     return print(greetings_text + ", " + name + "!")
 
 
-def print_instructions():
+def print_instructions() -> None:
     instructions_text_beginning = "Let's do some Math! This calculator can do " \
                                   "following operations:"
     instructions_text_ending = "Please, if your number is decimal, use '.'"
@@ -49,7 +49,7 @@ def print_instructions():
     print(instructions_text_ending)
 
 
-def print_intro():
-    print_title("2.0.0")
+def print_intro() -> None:
+    print_title("2.0.1")
     print_greetings()
     print_instructions()
