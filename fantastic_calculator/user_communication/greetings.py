@@ -43,13 +43,12 @@ def print_instructions() -> None:
     instructions_text_ending = "Please, if your number is decimal, use '.'"
 
     print(instructions_text_beginning)
-    operations_map = operators_list
-    for key, value in operations_map.items():
+    for key, value in operators_list.items():
         print(key, " -> ", value.description)
     print(instructions_text_ending)
 
 
 def print_intro() -> None:
-    print_title("2.0.1")
+    print_title("2.0.2")
     print_greetings()
     print_instructions()
